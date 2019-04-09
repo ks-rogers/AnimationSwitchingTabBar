@@ -1,0 +1,16 @@
+PODS:
+  - AnimationSwitchingTabBar (0.1.0)
+
+DEPENDENCIES:
+  - AnimationSwitchingTabBar (from `../`)
+
+EXTERNAL SOURCES:
+  AnimationSwitchingTabBar:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AnimationSwitchingTabBar: c6f65ed9bd6f94d9cf5ed570d4efb01e36db1550
+
+PODFILE CHECKSUM: 8ed6ae4d6fd06b8d00fb7d603264ed09a6a6dbac
+
+COCOAPODS: 1.7.0.beta.3

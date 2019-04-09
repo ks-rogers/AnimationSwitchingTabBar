@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'AnimationSwitchingTabBar_Example' do
+  pod 'AnimationSwitchingTabBar', :path => '../'
+
+  target 'AnimationSwitchingTabBar_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
