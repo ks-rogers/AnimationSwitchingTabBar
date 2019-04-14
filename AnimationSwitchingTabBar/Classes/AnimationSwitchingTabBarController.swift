@@ -17,6 +17,8 @@ open class AnimationSwitchingTabBarController: UITabBarController {
     
     private var tabSelectedView: TabSelectedView?
     
+    @IBInspectable private var backgroundColor: UIColor!
+    
     open override var viewControllers: [UIViewController]? {
         didSet {
             initializeContainers()
@@ -39,7 +41,7 @@ open class AnimationSwitchingTabBarController: UITabBarController {
         initializeContainers()
         delegate = self
         
-        view.backgroundColor = .red
+        view.backgroundColor = backgroundColor
         
         tabBar.backgroundImage = UIImage()
         tabBar.backgroundColor = .white
@@ -47,6 +49,7 @@ open class AnimationSwitchingTabBarController: UITabBarController {
     }
     
     private func initializeContainers() {
+        viewControllers?.forEach{ $0.view.backgroundColor = .clear }
         containers.forEach { $0.removeFromSuperview() }
         containers = createViewContainers()
         
@@ -105,7 +108,7 @@ open class AnimationSwitchingTabBarController: UITabBarController {
         tabStack.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tabStack.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor).isActive = true
         
-        let tabSelectedView = TabSelectedView()
+        let tabSelectedView = TabSelectedView(selectedColor: backgroundColor)
         self.tabSelectedView = tabSelectedView
         tabSelectedView.imageView.image = items[0].image
         tabSelectedView.translatesAutoresizingMaskIntoConstraints = false

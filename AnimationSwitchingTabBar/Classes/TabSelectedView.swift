@@ -10,9 +10,11 @@ import UIKit
 final class TabSelectedView: UIView {
     
     let imageView: UIImageView
+    let selectedColor: UIColor
     
-    init() {
+    init(selectedColor: UIColor) {
         self.imageView = UIImageView()
+        self.selectedColor = selectedColor
         super.init(frame: .zero)
         self.backgroundColor = .clear
     }
@@ -25,7 +27,7 @@ final class TabSelectedView: UIView {
         super.draw(rect)
         
         guard let context = UIGraphicsGetCurrentContext() else { return }
-        context.setFillColor(UIColor.red.cgColor)
+        context.setFillColor(selectedColor.cgColor)
         
         // Bezier curve
         context.move(to: .zero)
