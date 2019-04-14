@@ -7,6 +7,8 @@
 
 import UIKit
 
+private let duration: Double = 0.3
+
 open class AnimationSwitchingTabBarController: UITabBarController {
     
     private var containers: [UIView] = []
@@ -127,22 +129,47 @@ open class AnimationSwitchingTabBarController: UITabBarController {
     }
     
     private func tabSelected(index: Int, isAnimate: Bool = true) {
-        guard let selectedTabCenterXConstraint = selectedTabCenterXConstraint else { return }
+        guard let selectedTabCenterXConstraint = selectedTabCenterXConstraint, index != selectedIndex else { return }
         
         tabSelectedView?.removeConstraint(selectedTabCenterXConstraint)
         self.selectedTabCenterXConstraint = tabSelectedView?.centerXAnchor.constraint(equalTo: containers[index].centerXAnchor)
         self.selectedTabCenterXConstraint?.isActive = true
+        containers[selectedIndex].alpha = 0
         
         if isAnimate {
-            UIView.animate(withDuration: 0.3) { [weak self] in
+            UIView.animate(withDuration: duration) { [weak self] in
                 self?.view.layoutIfNeeded()
             }
-            UIView.animate(withDuration: 0.15, animations: { [weak self] in
+            UIView.animate(withDuration: duration / 2, animations: { [weak self] in
                 self?.tabSelectedView?.imageView.alpha = 0
             }) { [weak self] _ in
                 self?.tabSelectedView?.imageView.image = self?.containers[index].subviews.compactMap({ $0 as? UIImageView }).first?.image
-                UIView.animate(withDuration: 0.15) { [weak self] in
+                UIView.animate(withDuration: duration / 2) { [weak self] in
                     self?.tabSelectedView?.imageView.alpha = 1
+                }
+            }
+            let indexArray = selectedIndex < index ? selectedIndex...index : index...selectedIndex
+            let indices = selectedIndex < index ? Array<Int>(indexArray) : Array<Int>(indexArray.reversed())
+            for value in indices {
+                if value == indices.first {
+                    UIView.animate(withDuration: duration / Double(indices.count) / 2, delay: duration / Double(indices.count), animations: { [weak self] in
+                        self?.containers[value].alpha = 1
+                    })
+                } else {
+                    let index = Double(indices.firstIndex(of: value) ?? 0)
+                    UIView.animate(
+                        withDuration: duration / Double(indices.count) / 2,
+                        delay: duration * (2 * index - 1) / Double(indices.count) / 2,
+                        animations: { [weak self] in
+                            self?.containers[value].alpha = 0
+                    }) { [ weak self] _ in
+                        UIView.animate(
+                            withDuration: duration / Double(indices.count) / 2,
+                            delay: duration / Double(indices.count),
+                            animations: { [ weak self] in
+                                self?.containers[value].alpha = 1
+                        })
+                    }
                 }
             }
         } else {

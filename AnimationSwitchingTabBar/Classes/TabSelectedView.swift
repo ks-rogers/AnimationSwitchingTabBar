@@ -14,7 +14,7 @@ final class TabSelectedView: UIView {
     init() {
         self.imageView = UIImageView()
         super.init(frame: .zero)
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
     }
     
     required init?(coder aDecoder: NSCoder) {
