@@ -75,10 +75,6 @@ open class AnimationSwitchingTabBarController: UITabBarController {
             icon.centerYAnchor.constraint(equalTo: container.centerYAnchor, constant: -8).isActive = true
             icon.widthAnchor.constraint(equalToConstant: itemSize.width).isActive = true
             icon.heightAnchor.constraint(equalToConstant: itemSize.height).isActive = true
-            
-            if item.isEnabled == false {
-                icon.alpha = 0.5
-            }
             item.iconImageView = icon
             
             item.image = nil

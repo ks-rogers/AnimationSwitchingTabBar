@@ -9,11 +9,9 @@ import UIKit
 
 open class AnimationSwitchingTabBarItem: UITabBarItem {
     
-    open override var isEnabled: Bool {
+    open var iconImageView: UIImageView? {
         didSet {
-            iconImageView?.alpha = isEnabled == true ? 1 : 0.5
+            iconImageView?.alpha = 0.5
         }
     }
-    
-    open var iconImageView: UIImageView?
 }

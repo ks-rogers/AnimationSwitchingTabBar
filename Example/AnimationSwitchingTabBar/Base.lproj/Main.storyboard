@@ -24,6 +24,9 @@
                     <connections>
                         <segue destination="GIE-4E-I87" kind="relationship" relationship="viewControllers" id="tj4-UR-cJY"/>
                         <segue destination="rzo-7t-Zn4" kind="relationship" relationship="viewControllers" id="Yyh-KU-i1j"/>
+                        <segue destination="7Bz-Kp-VhR" kind="relationship" relationship="viewControllers" id="ntQ-zI-Sg2"/>
+                        <segue destination="i3T-bC-v4G" kind="relationship" relationship="viewControllers" id="mUI-YE-Yg2"/>
+                        <segue destination="xjF-Ot-AkX" kind="relationship" relationship="viewControllers" id="ngw-EP-q2i"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wic-zN-na0" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -86,9 +89,95 @@
             </objects>
             <point key="canvasLocation" x="1276" y="967"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Mf5-Hh-X82">
+            <objects>
+                <viewController id="7Bz-Kp-VhR" customClass="ViewController" customModule="AnimationSwitchingTabBar_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6nn-ch-siO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yZA-Eq-i4A">
+                                <rect key="frame" x="138.5" y="317.5" width="98" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="vy3-eX-C8m" firstAttribute="centerX" secondItem="yZA-Eq-i4A" secondAttribute="centerX" id="ePn-Yi-cLc"/>
+                            <constraint firstAttribute="centerY" secondItem="yZA-Eq-i4A" secondAttribute="centerY" id="iUT-0b-Kxh"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vy3-eX-C8m"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="receipt" id="RqX-Jk-jwB" customClass="AnimationSwitchingTabBarItem" customModule="AnimationSwitchingTabBar"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X9X-fA-UhI" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1276" y="1695"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="9TT-LY-hJJ">
+            <objects>
+                <viewController id="i3T-bC-v4G" customClass="ViewController" customModule="AnimationSwitchingTabBar_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CQF-qm-Zzk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9VV-ny-zuD">
+                                <rect key="frame" x="138.5" y="317.5" width="98" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="9VV-ny-zuD" secondAttribute="centerY" id="0UD-o1-lcB"/>
+                            <constraint firstItem="rdz-UW-GhW" firstAttribute="centerX" secondItem="9VV-ny-zuD" secondAttribute="centerX" id="w5V-q8-5LH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rdz-UW-GhW"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="camera" id="EY0-2z-PQa" customClass="AnimationSwitchingTabBarItem" customModule="AnimationSwitchingTabBar"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6PY-ZZ-LIw" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="458" y="1282"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="rpi-Lf-STu">
+            <objects>
+                <viewController id="xjF-Ot-AkX" customClass="ViewController" customModule="AnimationSwitchingTabBar_Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ciS-Xi-SFI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Screen5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uiA-hJ-LYU">
+                                <rect key="frame" x="139" y="317.5" width="97" height="32.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                                <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="uiA-hJ-LYU" secondAttribute="centerY" id="Asr-2L-8eY"/>
+                            <constraint firstItem="SOu-LR-OFK" firstAttribute="centerX" secondItem="uiA-hJ-LYU" secondAttribute="centerX" id="eoh-QI-xPY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="SOu-LR-OFK"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="" image="download" id="cxR-wn-5Y1" customClass="AnimationSwitchingTabBarItem" customModule="AnimationSwitchingTabBar"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="w34-rf-XTK" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-262" y="1297"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="camera" width="30" height="30"/>
         <image name="download" width="22.5" height="22.5"/>
+        <image name="receipt" width="30" height="30"/>
         <image name="search" width="22.5" height="22.5"/>
     </resources>
 </document>
