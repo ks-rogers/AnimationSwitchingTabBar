@@ -15,6 +15,7 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		EBC47820226C5A2900AA2FE0 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC4781F226C5A2900AA2FE0 /* TabController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		7F57963C2D4D15C51003BE4A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9716176F07377E6DB3A74128 /* Pods-AnimationSwitchingTabBar_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimationSwitchingTabBar_Example.debug.xcconfig"; path = "Target Support Files/Pods-AnimationSwitchingTabBar_Example/Pods-AnimationSwitchingTabBar_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E76A309DAF7CDEC16E0FCD80 /* Pods-AnimationSwitchingTabBar_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimationSwitchingTabBar_Tests.debug.xcconfig"; path = "Target Support Files/Pods-AnimationSwitchingTabBar_Tests/Pods-AnimationSwitchingTabBar_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		EBC4781F226C5A2900AA2FE0 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		ED5100DC9BB334A9DEF3EB17 /* Pods_AnimationSwitchingTabBar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimationSwitchingTabBar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -94,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
+				EBC4781F226C5A2900AA2FE0 /* TabController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
@@ -331,6 +334,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				EBC47820226C5A2900AA2FE0 /* TabController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
