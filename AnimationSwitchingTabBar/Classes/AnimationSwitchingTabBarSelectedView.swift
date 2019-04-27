@@ -1,5 +1,5 @@
 //
-//  TabSelectedView.swift
+//  AnimationSwitchingTabBarSelectedView.swift
 //  AnimationSwitchingTabBar
 //
 //  Created by chocovayashi on 2019/04/13.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TabSelectedView: UIView {
+final class AnimationSwitchingTabBarSelectedView: UIView {
     
     let imageView: UIImageView
     let selectedColor: UIColor

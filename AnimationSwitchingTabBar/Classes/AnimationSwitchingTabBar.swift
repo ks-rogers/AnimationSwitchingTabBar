@@ -20,7 +20,7 @@ open class AnimationSwitchingTabBar: UIView {
     
     private var tabStackView: UIStackView?
     
-    private var tabSelectedView: TabSelectedView?
+    private var tabSelectedView: AnimationSwitchingTabBarSelectedView?
     
     private var selectedTabCenterXConstraint: NSLayoutConstraint?
     
@@ -62,8 +62,8 @@ open class AnimationSwitchingTabBar: UIView {
         return tabStack
     }
     
-    private func createTabSelectedView(firstImage: UIImage?, selectedViewColor: UIColor) -> TabSelectedView {
-        let tabSelectedView = TabSelectedView(selectedColor: selectedViewColor)
+    private func createTabSelectedView(firstImage: UIImage?, selectedViewColor: UIColor) -> AnimationSwitchingTabBarSelectedView {
+        let tabSelectedView = AnimationSwitchingTabBarSelectedView(selectedColor: selectedViewColor)
         tabSelectedView.imageView.image = firstImage
         tabSelectedView.translatesAutoresizingMaskIntoConstraints = false
         tabSelectedView.isUserInteractionEnabled = false
