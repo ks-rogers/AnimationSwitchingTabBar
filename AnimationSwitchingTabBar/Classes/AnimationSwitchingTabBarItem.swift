@@ -9,6 +9,10 @@ import UIKit
 
 open class AnimationSwitchingTabBarItem: UIView {
     
+}
+
+open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {
+    
     var iconImage: UIImage? {
         didSet {
             iconImageView.image = iconImage

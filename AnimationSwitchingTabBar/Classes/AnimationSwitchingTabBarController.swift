@@ -7,6 +7,18 @@
 
 import UIKit
 
+public protocol AnimationSwitchingTabBarControllerDelegate: class {
+    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, willAnimated to: Int)
+    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, halfAnimated to: Int)
+    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, didAnimated to: Int)
+}
+
+public extension AnimationSwitchingTabBarControllerDelegate {
+    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, willAnimated to: Int) { }
+    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, halfAnimated to: Int) { }
+    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, didAnimated to: Int) { }
+}
+
 open class AnimationSwitchingTabBarController: UIViewController {
     
     open var animationDuration: Double = 0.3 {
@@ -22,6 +34,8 @@ open class AnimationSwitchingTabBarController: UIViewController {
     }
     
     open private(set) var selectedIndex: Int = 0
+    
+    open weak var delegate: AnimationSwitchingTabBarControllerDelegate?
     
     private var animationSwitchingTabBar: AnimationSwitchingTabBar!
     
@@ -99,6 +113,18 @@ open class AnimationSwitchingTabBarController: UIViewController {
 }
 
 extension AnimationSwitchingTabBarController: AnimationSwitchingTabBarDelegate {
+    func startAnimation(item: AnimationSwitchingTabBarItem, to: Int) {
+        delegate?.animationSwitchingTabBarController(item, willAnimated: to)
+    }
+    
+    func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int) {
+        delegate?.animationSwitchingTabBarController(item, halfAnimated: to)
+    }
+    
+    func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int) {
+        delegate?.animationSwitchingTabBarController(item, didAnimated: to)
+    }
+    
     func tabSelected(index: Int) {
         self.selectedIndex = index
         transition(to: viewControllers[index])
