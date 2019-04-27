@@ -8,7 +8,6 @@
 import UIKit
 
 let tabHeight: CGFloat = 49
-private let duration: Double = 0.3
 
 protocol AnimationSwitchingTabBarDelegate: class {
     func tabSelected(index: Int)
@@ -27,6 +26,19 @@ open class AnimationSwitchingTabBar: UIView {
     open private(set) var selectedIndex: Int = 0
     
     weak var delegate: AnimationSwitchingTabBarDelegate?
+    
+    var animationDuration: Double
+    var animationOptions: UIView.AnimationOptions
+    
+    init(animationDuration: Double, animationOptions: UIView.AnimationOptions) {
+        self.animationDuration = animationDuration
+        self.animationOptions = animationOptions
+        super.init(frame: .zero)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func setUp(viewControllers: [AnimationSwitchingViewController], selectedViewColor: UIColor) {
         tabItems.forEach { $0.removeFromSuperview() }
@@ -100,14 +112,15 @@ open class AnimationSwitchingTabBar: UIView {
             .forEach { $0.element.alpha = 1 }
 
         if isAnimate {
-            UIView.animate(withDuration: duration) { [weak self] in
+            UIView.animate(withDuration: animationDuration) { [weak self] in
                 self?.tabStackView?.layoutIfNeeded()
             }
-            UIView.animate(withDuration: duration / 2, animations: { [weak self] in
+            UIView.animate(withDuration: animationDuration / 2, animations: { [weak self] in
                 self?.tabSelectedView?.imageView.alpha = 0
             }) { [weak self] _ in
-                self?.tabSelectedView?.imageView.image = self?.tabItems[index].subviews.compactMap({ $0 as? UIImageView }).first?.image
-                UIView.animate(withDuration: duration / 2) { [weak self] in
+                guard let self = self else { return }
+                self.tabSelectedView?.imageView.image = self.tabItems[index].subviews.compactMap({ $0 as? UIImageView }).first?.image
+                UIView.animate(withDuration: self.animationDuration / 2) { [weak self] in
                     self?.tabSelectedView?.imageView.alpha = 1
                 }
             }
@@ -115,20 +128,21 @@ open class AnimationSwitchingTabBar: UIView {
             let indices = selectedIndex < index ? Array<Int>(indexArray) : Array<Int>(indexArray.reversed())
             for value in indices {
                 if value == indices.first {
-                    UIView.animate(withDuration: duration / Double(indices.count) / 2, delay: duration / Double(indices.count), animations: { [weak self] in
+                    UIView.animate(withDuration: animationDuration / Double(indices.count) / 2, delay: self.animationDuration / Double(indices.count), animations: { [weak self] in
                         self?.tabItems[value].alpha = 1
                     })
                 } else {
                     let index = Double(indices.firstIndex(of: value) ?? 0)
                     UIView.animate(
-                        withDuration: duration / Double(indices.count) / 2,
-                        delay: duration * (2 * index - 1) / Double(indices.count) / 2,
+                        withDuration: animationDuration / Double(indices.count) / 2,
+                        delay: animationDuration * (2 * index - 1) / Double(indices.count) / 2,
                         animations: { [weak self] in
                             self?.tabItems[value].alpha = 0
                     }) { [ weak self] _ in
+                        guard let self = self else { return }
                         UIView.animate(
-                            withDuration: duration / Double(indices.count) / 2,
-                            delay: duration / Double(indices.count),
+                            withDuration: self.animationDuration / Double(indices.count) / 2,
+                            delay: self.animationDuration / Double(indices.count),
                             animations: { [ weak self] in
                                 self?.tabItems[value].alpha = 1
                         })

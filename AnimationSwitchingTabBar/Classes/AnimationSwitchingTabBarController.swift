@@ -9,13 +9,25 @@ import UIKit
 
 open class AnimationSwitchingTabBarController: UIViewController {
     
+    open var animationDuration: Double = 0.3 {
+        didSet {
+            animationSwitchingTabBar.animationDuration = animationDuration
+        }
+    }
+    
+    open var animationOptions: UIView.AnimationOptions = [] {
+        didSet {
+            animationSwitchingTabBar.animationOptions = animationOptions
+        }
+    }
+    
+    open private(set) var selectedIndex: Int = 0
+    
     private var animationSwitchingTabBar: AnimationSwitchingTabBar!
     
     @IBInspectable private var backgroundColor: UIColor!
     
     private var viewControllers: [AnimationSwitchingViewController] = []
-    
-    open private(set) var selectedIndex: Int = 0
     
     open override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +47,7 @@ open class AnimationSwitchingTabBarController: UIViewController {
     }
     
     private func setTabBar() {
-        animationSwitchingTabBar = AnimationSwitchingTabBar()
+        animationSwitchingTabBar = AnimationSwitchingTabBar(animationDuration: animationDuration, animationOptions: animationOptions)
         animationSwitchingTabBar.delegate = self
         view.addSubview(animationSwitchingTabBar)
         animationSwitchingTabBar.translatesAutoresizingMaskIntoConstraints = false
