@@ -9,7 +9,7 @@ import UIKit
 
 open class AnimationSwitchingTabBarItem: UIView {
     
-    open var iconImage: UIImage? {
+    var iconImage: UIImage? {
         didSet {
             iconImageView.image = iconImage
         }

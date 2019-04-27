@@ -23,7 +23,7 @@ open class AnimationSwitchingTabBar: UIView {
     
     private var selectedTabCenterXConstraint: NSLayoutConstraint?
     
-    open private(set) var selectedIndex: Int = 0
+    private var selectedIndex: Int = 0
     
     weak var delegate: AnimationSwitchingTabBarDelegate?
     
