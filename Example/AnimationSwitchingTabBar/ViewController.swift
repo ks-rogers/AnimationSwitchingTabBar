@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import AnimationSwitchingTabBar
 
-final class ViewController: UIViewController {
+final class ViewController: AnimationSwitchingViewController {
 
 }
 
