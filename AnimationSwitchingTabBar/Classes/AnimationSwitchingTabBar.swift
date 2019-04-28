@@ -115,14 +115,17 @@ open class AnimationSwitchingTabBar: UIView {
         self.selectedTabCenterXConstraint?.isActive = true
         tabItems[selectedIndex].alpha = 0
         tabItems.enumerated()
-            .filter { $0.offset == selectedIndex }
+            .filter { $0.offset != selectedIndex }
             .forEach { $0.element.alpha = 1 }
 
         if isAnimate {
             guard let item = self.tabSelectedView?.items[index] else { return }
             delegate?.startAnimation(item: item, to: index)
-            UIView.animate(withDuration: animationDuration) { [weak self] in
+            UIView.animate(withDuration: animationDuration, animations: { [weak self] in
                 self?.tabStackView?.layoutIfNeeded()
+            }) { [weak self] _ in
+                guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
+                self.delegate?.finishAnimation(item: item, to: index)
             }
             UIView.animate(withDuration: animationDuration / 2, animations: { [weak self] in
                 self?.tabSelectedView?.item?.alpha = 0
@@ -130,11 +133,8 @@ open class AnimationSwitchingTabBar: UIView {
                 guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
                 self.delegate?.halfAnimation(item: item, to: index)
                 self.tabSelectedView?.setItem(index: index)
-                UIView.animate(withDuration: self.animationDuration / 2, animations:  { [weak self] in
+                UIView.animate(withDuration: self.animationDuration / 2) { [weak self] in
                     self?.tabSelectedView?.item?.alpha = 1
-                }) { [weak self] _ in
-                    guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
-                    self.delegate?.finishAnimation(item: item, to: index)
                 }
             }
             let indexArray = selectedIndex < index ? selectedIndex...index : index...selectedIndex

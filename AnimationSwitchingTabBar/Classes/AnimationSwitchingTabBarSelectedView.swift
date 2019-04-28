@@ -54,6 +54,7 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
     func setItem(index: Int) {
         self.item?.removeFromSuperview()
         self.item = items[index]
+        self.item?.alpha = 0
         addItem(self.item)
         item?.setSelectedConstraint()
     }
