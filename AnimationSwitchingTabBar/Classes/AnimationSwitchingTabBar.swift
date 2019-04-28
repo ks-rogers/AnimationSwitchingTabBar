@@ -30,18 +30,9 @@ open class AnimationSwitchingTabBar: UIView {
     
     weak var delegate: AnimationSwitchingTabBarDelegate?
     
-    var animationDuration: Double
-    var animationOptions: UIView.AnimationOptions
+    open var animationDuration: Double = 0.3
     
-    init(animationDuration: Double, animationOptions: UIView.AnimationOptions) {
-        self.animationDuration = animationDuration
-        self.animationOptions = animationOptions
-        super.init(frame: .zero)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    open var animationOptions: UIView.AnimationOptions = []
     
     func setUp(viewControllers: [AnimationSwitchingViewController], selectedViewColor: UIColor) {
         tabItems.forEach { $0.removeFromSuperview() }
@@ -121,34 +112,44 @@ open class AnimationSwitchingTabBar: UIView {
         if isAnimate {
             guard let item = self.tabSelectedView?.items[index] else { return }
             delegate?.startAnimation(item: item, to: index)
-            UIView.animate(withDuration: animationDuration, animations: { [weak self] in
+            UIView.animate(withDuration: animationDuration, delay: 0, options: animationOptions, animations: { [weak self] in
                 self?.tabStackView?.layoutIfNeeded()
             }) { [weak self] _ in
                 guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
                 self.delegate?.finishAnimation(item: item, to: index)
             }
-            UIView.animate(withDuration: animationDuration / 2, animations: { [weak self] in
-                self?.tabSelectedView?.item?.alpha = 0
+            UIView.animate(withDuration: animationDuration / 2,
+                           delay: 0,
+                           options: animationOptions,
+                           animations: { [weak self] in
+                            self?.tabSelectedView?.item?.alpha = 0
             }) { [weak self] _ in
                 guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
                 self.delegate?.halfAnimation(item: item, to: index)
                 self.tabSelectedView?.setItem(index: index)
-                UIView.animate(withDuration: self.animationDuration / 2) { [weak self] in
-                    self?.tabSelectedView?.item?.alpha = 1
-                }
+                UIView.animate(withDuration: self.animationDuration / 2,
+                               delay: 0,
+                               options: self.animationOptions,
+                               animations: { [weak self] in
+                                self?.tabSelectedView?.item?.alpha = 1
+                })
             }
             let indexArray = selectedIndex < index ? selectedIndex...index : index...selectedIndex
             let indices = selectedIndex < index ? Array<Int>(indexArray) : Array<Int>(indexArray.reversed())
             for value in indices {
                 if value == indices.first {
-                    UIView.animate(withDuration: animationDuration / Double(indices.count) / 2, delay: self.animationDuration / Double(indices.count), animations: { [weak self] in
-                        self?.tabItems[value].alpha = 1
+                    UIView.animate(withDuration: animationDuration / Double(indices.count) / 2,
+                                   delay: self.animationDuration / Double(indices.count),
+                                   options: self.animationOptions,
+                                   animations: { [weak self] in
+                                    self?.tabItems[value].alpha = 1
                     })
                 } else {
                     let index = Double(indices.firstIndex(of: value) ?? 0)
                     UIView.animate(
                         withDuration: animationDuration / Double(indices.count) / 2,
                         delay: animationDuration * (2 * index - 1) / Double(indices.count) / 2,
+                        options: self.animationOptions,
                         animations: { [weak self] in
                             self?.tabItems[value].alpha = 0
                     }) { [ weak self] _ in
@@ -156,6 +157,7 @@ open class AnimationSwitchingTabBar: UIView {
                         UIView.animate(
                             withDuration: self.animationDuration / Double(indices.count) / 2,
                             delay: self.animationDuration / Double(indices.count),
+                            options: self.animationOptions,
                             animations: { [ weak self] in
                                 self?.tabItems[value].alpha = 1
                         })

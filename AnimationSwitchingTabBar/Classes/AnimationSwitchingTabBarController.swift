@@ -21,25 +21,13 @@ public extension AnimationSwitchingTabBarControllerDelegate {
 
 open class AnimationSwitchingTabBarController: UIViewController {
     
-    open var animationDuration: Double = 0.3 {
-        didSet {
-            animationSwitchingTabBar.animationDuration = animationDuration
-        }
-    }
-    
-    open var animationOptions: UIView.AnimationOptions = [] {
-        didSet {
-            animationSwitchingTabBar.animationOptions = animationOptions
-        }
-    }
-    
     open private(set) var selectedIndex: Int = 0
     
     open weak var delegate: AnimationSwitchingTabBarControllerDelegate?
     
-    private var animationSwitchingTabBar: AnimationSwitchingTabBar!
+    open private(set) var animationSwitchingTabBar: AnimationSwitchingTabBar!
     
-    @IBInspectable private var backgroundColor: UIColor!
+    @IBInspectable open var backgroundColor: UIColor!
     
     private var viewControllers: [AnimationSwitchingViewController] = []
     
@@ -49,10 +37,7 @@ open class AnimationSwitchingTabBarController: UIViewController {
         setTabBar()
     }
     
-    open func setViewControllers(_ viewControllers: [UIViewController]) {
-        guard let viewControllers = viewControllers as? [AnimationSwitchingViewController] else {
-            fatalError("ViewControllers must inherit AnimationSwitchingViewController")
-        }
+    open func setViewControllers(_ viewControllers: [AnimationSwitchingViewController]) {
         setUp(viewControllers)
     }
     
@@ -61,7 +46,7 @@ open class AnimationSwitchingTabBarController: UIViewController {
     }
     
     private func setTabBar() {
-        animationSwitchingTabBar = AnimationSwitchingTabBar(animationDuration: animationDuration, animationOptions: animationOptions)
+        animationSwitchingTabBar = AnimationSwitchingTabBar()
         animationSwitchingTabBar.delegate = self
         view.addSubview(animationSwitchingTabBar)
         animationSwitchingTabBar.translatesAutoresizingMaskIntoConstraints = false
