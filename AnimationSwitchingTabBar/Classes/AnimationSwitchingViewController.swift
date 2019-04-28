@@ -12,12 +12,14 @@ open class AnimationSwitchingViewController: UIViewController {
     @IBInspectable private(set) var iconImage: UIImage?
     
     var customItem: AnimationSwitchingTabBarItem?
+    var selectedCustomItem: AnimationSwitchingTabBarItem?
     
     open func setIcon(image: UIImage) {
         self.iconImage = image
     }
     
-    open func setCustomItem(item: AnimationSwitchingTabBarItem) {
+    open func setItem(item: AnimationSwitchingTabBarItem? = nil, selectedItem: AnimationSwitchingTabBarItem? = nil) {
         customItem = item
+        selectedCustomItem = selectedItem
     }
 }
