@@ -37,12 +37,14 @@ open class AnimationSwitchingTabBarController: UIViewController {
         view.addSubview(animationSwitchingTabBar)
         animationSwitchingTabBar.translatesAutoresizingMaskIntoConstraints = false
         animationSwitchingTabBar.heightAnchor.constraint(equalToConstant: tabHeight).isActive = true
-        animationSwitchingTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        animationSwitchingTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         if #available(iOS 11.0, *) {
             animationSwitchingTabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+            animationSwitchingTabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+            animationSwitchingTabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
         } else {
             animationSwitchingTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+            animationSwitchingTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+            animationSwitchingTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         }
     }
     
