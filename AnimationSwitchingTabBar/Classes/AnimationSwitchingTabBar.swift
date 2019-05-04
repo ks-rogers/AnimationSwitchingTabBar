@@ -75,9 +75,15 @@ open class AnimationSwitchingTabBar: UIView {
     
     private func setConstraint() {
         tabStackView?.heightAnchor.constraint(equalToConstant: tabHeight).isActive = true
-        tabStackView?.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
-        tabStackView?.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        tabStackView?.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        if #available(iOS 11.0, *) {
+            tabStackView?.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor).isActive = true
+            tabStackView?.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor).isActive = true
+            tabStackView?.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor).isActive = true
+        } else {
+            tabStackView?.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+            tabStackView?.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+            tabStackView?.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        }
         
         tabSelectedView?.heightAnchor.constraint(equalTo: tabItems[0].heightAnchor, multiplier: 1).isActive = true
         tabSelectedView?.widthAnchor.constraint(equalTo: tabItems[0].heightAnchor, multiplier: 2).isActive = true

@@ -23,6 +23,12 @@ open class AnimationSwitchingTabBarController: UIViewController {
         setTabBar()
     }
     
+    open override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        setConstraint()
+    }
+    
     open func setViewControllers(_ viewControllers: [AnimationSwitchingViewController]) {
         setUp(viewControllers)
     }
@@ -36,15 +42,21 @@ open class AnimationSwitchingTabBarController: UIViewController {
         animationSwitchingTabBar.delegate = self
         view.addSubview(animationSwitchingTabBar)
         animationSwitchingTabBar.translatesAutoresizingMaskIntoConstraints = false
-        animationSwitchingTabBar.heightAnchor.constraint(equalToConstant: tabHeight).isActive = true
+    }
+    
+    private func setConstraint() {
+        animationSwitchingTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        animationSwitchingTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        animationSwitchingTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        
         if #available(iOS 11.0, *) {
-            animationSwitchingTabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-            animationSwitchingTabBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-            animationSwitchingTabBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+            if let heightAnchor = animationSwitchingTabBar.constraints
+                .filter({ $0.firstAnchor == animationSwitchingTabBar.heightAnchor }).first {
+                animationSwitchingTabBar.removeConstraint(heightAnchor)
+            }
+            animationSwitchingTabBar.heightAnchor.constraint(equalToConstant: tabHeight + view.safeAreaInsets.bottom).isActive = true
         } else {
-            animationSwitchingTabBar.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-            animationSwitchingTabBar.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-            animationSwitchingTabBar.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+            animationSwitchingTabBar.heightAnchor.constraint(equalToConstant: tabHeight).isActive = true
         }
     }
     
