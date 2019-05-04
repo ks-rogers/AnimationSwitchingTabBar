@@ -43,6 +43,10 @@ open class AnimationSwitchingTabBar: UIView {
         setConstraint()
     }
     
+    func changeSelectedView(color: UIColor) {
+        tabSelectedView?.change(color: color)
+    }
+    
     private func createTabItems(viewControllers: [AnimationSwitchingViewController]) -> [AnimationSwitchingTabBarItem] {
         return viewControllers.map { createTabItem(viewController: $0) }
     }

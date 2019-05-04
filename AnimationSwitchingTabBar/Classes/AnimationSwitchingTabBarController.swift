@@ -13,7 +13,12 @@ open class AnimationSwitchingTabBarController: UIViewController {
     
     open private(set) var animationSwitchingTabBar: AnimationSwitchingTabBar!
     
-    @IBInspectable open var backgroundColor: UIColor!
+    @IBInspectable open var backgroundColor: UIColor! {
+        didSet {
+            viewControllers.forEach { $0.view.backgroundColor = backgroundColor }
+            animationSwitchingTabBar?.changeSelectedView(color: backgroundColor)
+        }
+    }
     
     private var viewControllers: [AnimationSwitchingViewController] = []
     

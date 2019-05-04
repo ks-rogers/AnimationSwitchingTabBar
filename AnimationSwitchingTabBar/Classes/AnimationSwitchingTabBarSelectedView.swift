@@ -10,7 +10,7 @@ import UIKit
 final class AnimationSwitchingTabBarSelectedView: UIView {
     
     let imageView: UIImageView
-    let selectedColor: UIColor
+    private var selectedColor: UIColor
     
     init(selectedColor: UIColor) {
         self.imageView = UIImageView()
@@ -21,6 +21,11 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func change(color: UIColor) {
+        selectedColor = color
+        setNeedsDisplay()
     }
     
     override func draw(_ rect: CGRect) {
