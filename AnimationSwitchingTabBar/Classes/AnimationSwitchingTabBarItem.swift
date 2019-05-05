@@ -10,6 +10,8 @@ import UIKit
 open class AnimationSwitchingTabBarItem: UIView {
     open func setConstraint() { }
     open func setSelectedConstraint() {}
+    open func animateWhenHalfMove() {}
+    open func animateWhenDidMoved() {}
 }
 
 open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {

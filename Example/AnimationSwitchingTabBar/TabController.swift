@@ -39,6 +39,14 @@ final class AnimationSwitchingTabBarLabelItem: AnimationSwitchingTabBarItem {
         addSubview(label)
     }
     
+    override func animateWhenHalfMove() {
+        let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
+        rotateAnimation.fromValue = 0.0
+        rotateAnimation.toValue = CGFloat.pi * 2
+        rotateAnimation.duration = TimeInterval(0.5)
+        label.layer.add(rotateAnimation, forKey: nil)
+    }
+    
     override func setConstraint() {
         let itemSize = CGSize(width: 30, height: 30)
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
