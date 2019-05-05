@@ -15,6 +15,9 @@
 		607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDC1AFB9204008FA782 /* Images.xcassets */; };
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
+		EB84FB7A227EE6B20086D35F /* Notification.json in Resources */ = {isa = PBXBuildFile; fileRef = EB84FB79227EE6B20086D35F /* Notification.json */; };
+		EB84FB7C227EE6C60086D35F /* AnimationSwitchingTabBarLabelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FB7B227EE6C60086D35F /* AnimationSwitchingTabBarLabelItem.swift */; };
+		EB84FB7E227EE6F70086D35F /* AnimationSwitchingTabBarLottieItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB84FB7D227EE6F70086D35F /* AnimationSwitchingTabBarLottieItem.swift */; };
 		EBC47820226C5A2900AA2FE0 /* TabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC4781F226C5A2900AA2FE0 /* TabController.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +50,9 @@
 		7F57963C2D4D15C51003BE4A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9716176F07377E6DB3A74128 /* Pods-AnimationSwitchingTabBar_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimationSwitchingTabBar_Example.debug.xcconfig"; path = "Target Support Files/Pods-AnimationSwitchingTabBar_Example/Pods-AnimationSwitchingTabBar_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E76A309DAF7CDEC16E0FCD80 /* Pods-AnimationSwitchingTabBar_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AnimationSwitchingTabBar_Tests.debug.xcconfig"; path = "Target Support Files/Pods-AnimationSwitchingTabBar_Tests/Pods-AnimationSwitchingTabBar_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB84FB79227EE6B20086D35F /* Notification.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Notification.json; sourceTree = "<group>"; };
+		EB84FB7B227EE6C60086D35F /* AnimationSwitchingTabBarLabelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSwitchingTabBarLabelItem.swift; sourceTree = "<group>"; };
+		EB84FB7D227EE6F70086D35F /* AnimationSwitchingTabBarLottieItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSwitchingTabBarLottieItem.swift; sourceTree = "<group>"; };
 		EBC4781F226C5A2900AA2FE0 /* TabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabController.swift; sourceTree = "<group>"; };
 		ED5100DC9BB334A9DEF3EB17 /* Pods_AnimationSwitchingTabBar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AnimationSwitchingTabBar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -101,6 +107,9 @@
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
+				EB84FB7B227EE6C60086D35F /* AnimationSwitchingTabBarLabelItem.swift */,
+				EB84FB7D227EE6F70086D35F /* AnimationSwitchingTabBarLottieItem.swift */,
+				EB84FB79227EE6B20086D35F /* Notification.json */,
 				607FACD31AFB9204008FA782 /* Supporting Files */,
 			);
 			name = "Example for AnimationSwitchingTabBar";
@@ -248,6 +257,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EB84FB7A227EE6B20086D35F /* Notification.json in Resources */,
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
@@ -294,10 +304,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-AnimationSwitchingTabBar_Example/Pods-AnimationSwitchingTabBar_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AnimationSwitchingTabBar/AnimationSwitchingTabBar.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AnimationSwitchingTabBar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -334,6 +346,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
+				EB84FB7C227EE6C60086D35F /* AnimationSwitchingTabBarLabelItem.swift in Sources */,
+				EB84FB7E227EE6F70086D35F /* AnimationSwitchingTabBarLottieItem.swift in Sources */,
 				EBC47820226C5A2900AA2FE0 /* TabController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,
 			);
