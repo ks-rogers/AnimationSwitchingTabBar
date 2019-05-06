@@ -25,7 +25,7 @@ final class AnimationSwitchingTabBarLottieItem: AnimationSwitchingTabBarItem {
         animationView.play()
     }
     
-    override func setConstraint() {
+    override func setNotSelectedItem() {
         let itemSize = CGSize(width: 30, height: 30)
         animationView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         animationView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -33,7 +33,7 @@ final class AnimationSwitchingTabBarLottieItem: AnimationSwitchingTabBarItem {
         animationView.heightAnchor.constraint(equalToConstant: itemSize.height).isActive = true
     }
     
-    override func setSelectedConstraint() {
+    override func setSelectedItem() {
         let itemSize = CGSize(width: 250, height: 250)
         animationView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         animationView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true

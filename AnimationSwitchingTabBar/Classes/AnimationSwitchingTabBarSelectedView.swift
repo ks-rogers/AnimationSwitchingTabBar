@@ -54,7 +54,7 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
         addSubview(whiteCircle)
         
         addItem(item)
-        item?.setSelectedConstraint()
+        item?.setSelectedItem()
     }
     
     func setItem(index: Int) {
@@ -62,7 +62,7 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
         self.item = items[index]
         self.item?.alpha = 0
         addItem(self.item)
-        item?.setSelectedConstraint()
+        item?.setSelectedItem()
     }
     
     func setTabItems(viewControllers: [AnimationSwitchingViewController]) {

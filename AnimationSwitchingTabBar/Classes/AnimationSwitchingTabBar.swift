@@ -61,7 +61,7 @@ open class AnimationSwitchingTabBar: UIView {
             tabItem.iconImage = viewController.iconImage
             viewController.customItem = tabItem
         }
-        viewController.customItem?.setConstraint()
+        viewController.customItem?.setNotSelectedItem()
         viewController.customItem?.translatesAutoresizingMaskIntoConstraints = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapTabItem))
         viewController.customItem?.addGestureRecognizer(tap)

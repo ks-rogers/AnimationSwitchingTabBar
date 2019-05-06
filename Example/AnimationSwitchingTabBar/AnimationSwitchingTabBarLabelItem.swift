@@ -31,7 +31,7 @@ final class AnimationSwitchingTabBarLabelItem: AnimationSwitchingTabBarItem {
         label.layer.add(rotateAnimation, forKey: nil)
     }
     
-    override func setConstraint() {
+    override func setNotSelectedItem() {
         let itemSize = CGSize(width: 30, height: 30)
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
@@ -39,7 +39,7 @@ final class AnimationSwitchingTabBarLabelItem: AnimationSwitchingTabBarItem {
         label.heightAnchor.constraint(equalToConstant: itemSize.height).isActive = true
     }
     
-    override func setSelectedConstraint() {
+    override func setSelectedItem() {
         let itemSize = CGSize(width: 30, height: 30)
         label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
