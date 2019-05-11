@@ -17,6 +17,8 @@ final class AnimationSwitchingTabBarLottieItem: AnimationSwitchingTabBarItem {
     public override init(frame: CGRect) {
         animationView = AnimationView(name: "Notification")
         super.init(frame: frame)
+        
+        isGraduallyUpAlpha = false
         animationView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(animationView)
     }

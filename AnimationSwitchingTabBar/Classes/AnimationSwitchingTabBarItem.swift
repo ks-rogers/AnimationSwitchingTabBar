@@ -8,6 +8,7 @@
 import UIKit
 
 open class AnimationSwitchingTabBarItem: UIView {
+    open var isGraduallyUpAlpha = true
     open func setNotSelectedItem() {}
     open func setSelectedItem() {}
     open func animate() {}

@@ -142,12 +142,16 @@ open class AnimationSwitchingTabBar: UIView {
                 self.delegate?.halfAnimation(item: item, to: index)
                 item.animate()
                 self.tabSelectedView?.setItem(index: index)
-                UIView.animate(withDuration: self.animationDuration / 2,
-                               delay: 0,
-                               options: self.animationOptions,
-                               animations: { [weak self] in
-                                self?.tabSelectedView?.item?.alpha = 1
-                })
+                if item.isGraduallyUpAlpha {
+                    UIView.animate(withDuration: self.animationDuration / 2,
+                                   delay: 0,
+                                   options: self.animationOptions,
+                                   animations: { [weak self] in
+                                    self?.tabSelectedView?.item?.alpha = 1
+                    })
+                } else {
+                    self.tabSelectedView?.item?.alpha = 1
+                }
             }
             let indexArray = selectedIndex < index ? selectedIndex...index : index...selectedIndex
             let indices = selectedIndex < index ? Array<Int>(indexArray) : Array<Int>(indexArray.reversed())
