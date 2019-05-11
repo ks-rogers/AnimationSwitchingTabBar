@@ -8,15 +8,15 @@
 import UIKit
 
 public protocol AnimationSwitchingTabBarControllerDelegate: class {
-    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, willAnimated to: Int)
-    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, halfAnimated to: Int)
-    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, didAnimated to: Int)
+    func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, shouldSelect viewController: UIViewController) -> Bool
+    func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, didSelect viewController: UIViewController)
 }
 
 public extension AnimationSwitchingTabBarControllerDelegate {
-    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, willAnimated to: Int) { }
-    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, halfAnimated to: Int) { }
-    func animationSwitchingTabBarController(_ toTabBarItem: AnimationSwitchingTabBarItem, didAnimated to: Int) { }
+    func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return true
+    }
+    func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, didSelect viewController: UIViewController) { }
 }
 
 open class AnimationSwitchingTabBarController: UIViewController {
@@ -117,20 +117,20 @@ open class AnimationSwitchingTabBarController: UIViewController {
 }
 
 extension AnimationSwitchingTabBarController: AnimationSwitchingTabBarDelegate {
-    func startAnimation(item: AnimationSwitchingTabBarItem, to: Int) {
-        delegate?.animationSwitchingTabBarController(item, willAnimated: to)
+    func shouldTabSelected(index: Int) -> Bool {
+        guard let delegate = delegate else { return true }
+        return delegate.tabBarController(self, shouldSelect: viewControllers[index])
     }
     
-    func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int) {
-        delegate?.animationSwitchingTabBarController(item, halfAnimated: to)
-    }
+    func startAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
     
-    func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int) {
-        delegate?.animationSwitchingTabBarController(item, didAnimated: to)
-    }
+    func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
+    
+    func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
     
     func tabSelected(index: Int) {
         self.selectedIndex = index
         transition(to: viewControllers[index])
+        self.delegate?.tabBarController(self, didSelect: viewControllers[index])
     }
 }

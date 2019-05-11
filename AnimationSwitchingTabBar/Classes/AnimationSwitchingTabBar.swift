@@ -10,6 +10,7 @@ import UIKit
 let tabHeight: CGFloat = 49
 
 protocol AnimationSwitchingTabBarDelegate: class {
+    func shouldTabSelected(index: Int) -> Bool
     func tabSelected(index: Int)
     func startAnimation(item: AnimationSwitchingTabBarItem, to: Int)
     func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int)
@@ -110,6 +111,9 @@ open class AnimationSwitchingTabBar: UIView {
     
     func tabSelected(index: Int, isAnimate: Bool = true) {
         guard let selectedTabCenterXConstraint = selectedTabCenterXConstraint, index != selectedIndex else { return }
+        if let delegate = delegate, !delegate.shouldTabSelected(index: index) {
+            return
+        }
         self.delegate?.tabSelected(index: index)
         tabSelectedView?.removeConstraint(selectedTabCenterXConstraint)
         self.selectedTabCenterXConstraint = tabSelectedView?.centerXAnchor.constraint(equalTo: tabItems[index].centerXAnchor)
