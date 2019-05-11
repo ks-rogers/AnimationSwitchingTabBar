@@ -10,8 +10,7 @@ import UIKit
 open class AnimationSwitchingTabBarItem: UIView {
     open func setNotSelectedItem() {}
     open func setSelectedItem() {}
-    open func animateWhenHalfMove() {}
-    open func animateWhenDidMoved() {}
+    open func animate() {}
 }
 
 open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {

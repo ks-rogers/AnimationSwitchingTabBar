@@ -23,7 +23,7 @@ final class AnimationSwitchingTabBarLabelItem: AnimationSwitchingTabBarItem {
         addSubview(label)
     }
     
-    override func animateWhenHalfMove() {
+    override func animate() {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotateAnimation.fromValue = 0.0
         rotateAnimation.toValue = CGFloat.pi * 2

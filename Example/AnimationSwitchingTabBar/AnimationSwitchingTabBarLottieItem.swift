@@ -21,7 +21,7 @@ final class AnimationSwitchingTabBarLottieItem: AnimationSwitchingTabBarItem {
         addSubview(animationView)
     }
     
-    override func animateWhenHalfMove() {
+    override func animate() {
         animationView.play()
     }
     
