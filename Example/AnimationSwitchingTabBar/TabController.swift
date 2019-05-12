@@ -20,6 +20,8 @@ final class TabController: AnimationSwitchingTabBarController {
         let screen3 = storyboard.instantiateViewController(withIdentifier: "Screen3") as! AnimationSwitchingViewController
         let screen4 = storyboard.instantiateViewController(withIdentifier: "Screen4") as! AnimationSwitchingViewController
         let screen5 = storyboard.instantiateViewController(withIdentifier: "Screen5") as! AnimationSwitchingViewController
+        screen4.setItem(selectedItem: AnimationSwitchingTabBarLottieItem())
+        screen5.setItem(item: AnimationSwitchingTabBarLabelItem(), selectedItem: AnimationSwitchingTabBarLabelItem())
         setViewControllers([screen1, screen2, screen3, screen4, screen5])
     }
 }

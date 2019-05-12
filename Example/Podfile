@@ -2,6 +2,7 @@ use_frameworks!
 
 target 'AnimationSwitchingTabBar_Example' do
   pod 'AnimationSwitchingTabBar', :path => '../'
+  pod 'lottie-ios'
 
   target 'AnimationSwitchingTabBar_Tests' do
     inherit! :search_paths

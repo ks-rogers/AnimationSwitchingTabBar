@@ -10,7 +10,11 @@ import UIKit
 let tabHeight: CGFloat = 49
 
 protocol AnimationSwitchingTabBarDelegate: class {
+    func shouldTabSelected(index: Int) -> Bool
     func tabSelected(index: Int)
+    func startAnimation(item: AnimationSwitchingTabBarItem, to: Int)
+    func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int)
+    func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int)
 }
 
 open class AnimationSwitchingTabBar: UIView {
@@ -36,7 +40,8 @@ open class AnimationSwitchingTabBar: UIView {
         tabItems = createTabItems(viewControllers: viewControllers)
         tabStackView?.removeFromSuperview()
         tabStackView = createStackView(tabItems: tabItems)
-        tabSelectedView = createTabSelectedView(firstImage: viewControllers.first?.iconImage, selectedViewColor: selectedViewColor)
+        tabSelectedView = createTabSelectedView(selectedViewColor: selectedViewColor)
+        tabSelectedView?.setTabItems(viewControllers: viewControllers)
         tabStackView?.addSubview(tabSelectedView!)
         addSubview(tabStackView!)
         
@@ -52,12 +57,16 @@ open class AnimationSwitchingTabBar: UIView {
     }
     
     private func createTabItem(viewController: AnimationSwitchingViewController) -> AnimationSwitchingTabBarItem {
-        let tabItem = AnimationSwitchingTabBarItem()
-        tabItem.iconImage = viewController.iconImage
-        tabItem.translatesAutoresizingMaskIntoConstraints = false
+        if viewController.customItem == nil {
+            let tabItem = AnimationSwitchingTabBarDefaultItem()
+            tabItem.iconImage = viewController.iconImage
+            viewController.customItem = tabItem
+        }
+        viewController.customItem?.setNotSelectedItem()
+        viewController.customItem?.translatesAutoresizingMaskIntoConstraints = false
         let tap = UITapGestureRecognizer(target: self, action: #selector(tapTabItem))
-        tabItem.addGestureRecognizer(tap)
-        return tabItem
+        viewController.customItem?.addGestureRecognizer(tap)
+        return viewController.customItem!
     }
     
     private func createStackView(tabItems: [UIView]) -> UIStackView {
@@ -69,9 +78,8 @@ open class AnimationSwitchingTabBar: UIView {
         return tabStack
     }
     
-    private func createTabSelectedView(firstImage: UIImage?, selectedViewColor: UIColor) -> AnimationSwitchingTabBarSelectedView {
+    private func createTabSelectedView(selectedViewColor: UIColor) -> AnimationSwitchingTabBarSelectedView {
         let tabSelectedView = AnimationSwitchingTabBarSelectedView(selectedColor: selectedViewColor)
-        tabSelectedView.imageView.image = firstImage
         tabSelectedView.translatesAutoresizingMaskIntoConstraints = false
         tabSelectedView.isUserInteractionEnabled = false
         return tabSelectedView
@@ -103,33 +111,47 @@ open class AnimationSwitchingTabBar: UIView {
     
     func tabSelected(index: Int, isAnimate: Bool = true) {
         guard let selectedTabCenterXConstraint = selectedTabCenterXConstraint, index != selectedIndex else { return }
+        if let delegate = delegate, !delegate.shouldTabSelected(index: index) {
+            return
+        }
         self.delegate?.tabSelected(index: index)
         tabSelectedView?.removeConstraint(selectedTabCenterXConstraint)
         self.selectedTabCenterXConstraint = tabSelectedView?.centerXAnchor.constraint(equalTo: tabItems[index].centerXAnchor)
         self.selectedTabCenterXConstraint?.isActive = true
         tabItems[selectedIndex].alpha = 0
         tabItems.enumerated()
-            .filter { $0.offset == selectedIndex }
+            .filter { $0.offset != selectedIndex }
             .forEach { $0.element.alpha = 1 }
 
         if isAnimate {
+            guard let item = self.tabSelectedView?.items[index] else { return }
+            delegate?.startAnimation(item: item, to: index)
             UIView.animate(withDuration: animationDuration, delay: 0, options: animationOptions, animations: { [weak self] in
                 self?.tabStackView?.layoutIfNeeded()
-            })
+            }) { [weak self] _ in
+                guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
+                self.delegate?.finishAnimation(item: item, to: index)
+            }
             UIView.animate(withDuration: animationDuration / 2,
                            delay: 0,
                            options: animationOptions,
                            animations: { [weak self] in
-                            self?.tabSelectedView?.imageView.alpha = 0
+                            self?.tabSelectedView?.item?.alpha = 0
             }) { [weak self] _ in
-                guard let self = self else { return }
-                self.tabSelectedView?.imageView.image = self.tabItems[index].subviews.compactMap({ $0 as? UIImageView }).first?.image
-                UIView.animate(withDuration: self.animationDuration / 2,
-                               delay: 0,
-                               options: self.animationOptions,
-                               animations: { [weak self] in
-                                self?.tabSelectedView?.imageView.alpha = 1
-                })
+                guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
+                self.delegate?.halfAnimation(item: item, to: index)
+                item.animate()
+                self.tabSelectedView?.setItem(index: index)
+                if item.isGraduallyUpAlpha {
+                    UIView.animate(withDuration: self.animationDuration / 2,
+                                   delay: 0,
+                                   options: self.animationOptions,
+                                   animations: { [weak self] in
+                                    self?.tabSelectedView?.item?.alpha = 1
+                    })
+                } else {
+                    self.tabSelectedView?.item?.alpha = 1
+                }
             }
             let indexArray = selectedIndex < index ? selectedIndex...index : index...selectedIndex
             let indices = selectedIndex < index ? Array<Int>(indexArray) : Array<Int>(indexArray.reversed())
@@ -162,7 +184,7 @@ open class AnimationSwitchingTabBar: UIView {
                 }
             }
         } else {
-            tabSelectedView?.imageView.image = tabItems[index].subviews.compactMap({ $0 as? UIImageView }).first?.image
+            tabSelectedView?.setItem(index: index)
         }
         selectedIndex = index
     }
