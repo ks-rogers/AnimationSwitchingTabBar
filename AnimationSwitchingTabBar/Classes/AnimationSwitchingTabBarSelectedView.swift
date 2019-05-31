@@ -15,8 +15,11 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
 
     private var selectedColor: UIColor
     
+    private let whiteCircle: UIView
+    
     init(selectedColor: UIColor) {
         self.selectedColor = selectedColor
+        whiteCircle = UIView(frame: CGRect(origin: .zero, size: .init(width: 50, height: 50)))
         super.init(frame: .zero)
         self.backgroundColor = .clear
     }
@@ -47,7 +50,6 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
         context.drawPath(using: .fill)
         
         // White Circle
-        let whiteCircle = UIView(frame: CGRect(origin: .zero, size: .init(width: 50, height: 50)))
         whiteCircle.layer.position = CGPoint(x: rect.maxX / 2, y: rect.maxY / 2 - 10)
         whiteCircle.backgroundColor = .white
         whiteCircle.layer.cornerRadius = 25
@@ -68,6 +70,15 @@ final class AnimationSwitchingTabBarSelectedView: UIView {
     func setTabItems(viewControllers: [AnimationSwitchingViewController]) {
         items = viewControllers.map { createTabItem(viewController: $0) }
         item = items.first
+    }
+    
+    func springAnimation() {
+        let springAnimation = CABasicAnimation(keyPath: "position.x")
+        springAnimation.fromValue = whiteCircle.layer.position.x + 4
+        springAnimation.toValue = whiteCircle.layer.position.x - 4
+        springAnimation.duration = 0.1
+        springAnimation.autoreverses = true
+        whiteCircle.layer.add(springAnimation, forKey: "springAnimation")
     }
     
     private func addItem(_ item: AnimationSwitchingTabBarItem?) {
