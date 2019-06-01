@@ -9,7 +9,8 @@ import UIKit
 
 let tabHeight: CGFloat = 49
 
-protocol AnimationSwitchingTabBarDelegate: class {
+/// The `AnimationSwitchingTabBarDelegate` protocol defines optional methods for a delegate of a `AnimationSwitchingTabBar` object
+public protocol AnimationSwitchingTabBarDelegate: class {
     func shouldTabSelected(index: Int) -> Bool
     func tabSelected(index: Int)
     func startAnimation(item: AnimationSwitchingTabBarItem, to: Int)
@@ -17,8 +18,36 @@ protocol AnimationSwitchingTabBarDelegate: class {
     func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int)
 }
 
+extension AnimationSwitchingTabBarDelegate {
+    public func shouldTabSelected(index: Int) -> Bool {
+        return true
+    }
+
+    public func tabSelected(index: Int) {}
+
+    public func startAnimation(item: AnimationSwitchingTabBarItem, to: Int) {}
+
+    public func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int) {}
+
+    public func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int) {}
+}
+
+/// An animatable control that displays one or more buttons in a tab bar for selecting between different subtasks, views, or modes in an app.
 open class AnimationSwitchingTabBar: UIView {
-    
+
+    /// The tab bar’s delegate object.
+    weak var delegate: AnimationSwitchingTabBarDelegate?
+
+    /// The tab bar’s animation duration.
+    ///
+    /// The default value is 0.3.
+    open var animationDuration: Double = 0.3
+
+    /// The tab bar’s animation options.
+    ///
+    /// The default value is empty.
+    open var animationOptions: UIView.AnimationOptions = []
+
     private var tabItems: [AnimationSwitchingTabBarItem] = []
     
     private var tabStackView: UIStackView?
@@ -28,14 +57,9 @@ open class AnimationSwitchingTabBar: UIView {
     private var selectedTabCenterXConstraint: NSLayoutConstraint?
     
     private var selectedIndex: Int = 0
-    
-    weak var delegate: AnimationSwitchingTabBarDelegate?
-    
-    open var animationDuration: Double = 0.3
-    
-    open var animationOptions: UIView.AnimationOptions = []
-    
-    func setUp(viewControllers: [AnimationSwitchingViewController], selectedViewColor: UIColor) {
+
+    /// Setup the tab bar layouts.
+    public func setup(viewControllers: [AnimationSwitchingViewController], selectedViewColor: UIColor) {
         tabItems.forEach { $0.removeFromSuperview() }
         tabItems = createTabItems(viewControllers: viewControllers)
         tabStackView?.removeFromSuperview()
@@ -48,7 +72,7 @@ open class AnimationSwitchingTabBar: UIView {
         setConstraint()
     }
     
-    func changeSelectedView(color: UIColor) {
+    internal func changeSelectedView(color: UIColor) {
         tabSelectedView?.change(color: color)
     }
     
@@ -109,7 +133,7 @@ open class AnimationSwitchingTabBar: UIView {
         tabSelected(index: index)
     }
     
-    func tabSelected(index: Int, isAnimate: Bool = true) {
+    internal func tabSelected(index: Int, isAnimate: Bool = true) {
         guard let selectedTabCenterXConstraint = selectedTabCenterXConstraint, index != selectedIndex else { return }
         if let delegate = delegate, !delegate.shouldTabSelected(index: index) {
             return

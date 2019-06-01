@@ -7,6 +7,7 @@
 
 import UIKit
 
+/// The `AnimationSwitchingTabBarControllerDelegate` protocol defines optional methods for a delegate of a `AnimationSwitchingTabBarController` object
 public protocol AnimationSwitchingTabBarControllerDelegate: class {
     func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, shouldSelect viewController: UIViewController) -> Bool
     func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, didSelect viewController: UIViewController)
@@ -16,26 +17,41 @@ public extension AnimationSwitchingTabBarControllerDelegate {
     func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, shouldSelect viewController: UIViewController) -> Bool {
         return true
     }
+
     func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, didSelect viewController: UIViewController) { }
 }
 
+///An animatable container view controller that manages a radio-style selection interface, where the selection determines which child view controller to display.
 open class AnimationSwitchingTabBarController: UIViewController {
-    
-    open private(set) var selectedIndex: Int = 0
-    
+
+    /// The tab bar cobtroller’s delegate object.
     open weak var delegate: AnimationSwitchingTabBarControllerDelegate?
-    
-    open private(set) var animationSwitchingTabBar: AnimationSwitchingTabBar!
-    
-    @IBInspectable open var backgroundColor: UIColor! {
+
+    /// tab bar controller's background color.
+    @IBInspectable
+    open var backgroundColor: UIColor! {
         didSet {
             viewControllers.forEach { $0.view.backgroundColor = backgroundColor }
             animationSwitchingTabBar?.changeSelectedView(color: backgroundColor)
         }
     }
-    
-    private var viewControllers: [AnimationSwitchingViewController] = []
-    
+
+    /// The tab bar view associated with this controller.
+    open private(set) var animationSwitchingTabBar: AnimationSwitchingTabBar!
+
+
+    /// The selected index of the tab bar controller.
+    open var selectedIndex: Int {
+        return _selectedIndex
+    }
+
+    fileprivate var _selectedIndex: Int = 0
+
+    /// The child viewControllers of the tab bar controller.
+    fileprivate var viewControllers: [AnimationSwitchingViewController] = []
+
+    private lazy var tabBarDelegate = AnimationSwitchingTabBarControllerTabBarDelegate(viewController: self)
+
     open override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,18 +63,21 @@ open class AnimationSwitchingTabBarController: UIViewController {
         
         setConstraint()
     }
-    
+
+    /// Sets the viewControllers in the tab bar controller.
     open func setViewControllers(_ viewControllers: [AnimationSwitchingViewController]) {
-        setUp(viewControllers)
+        setup(viewControllers)
     }
     
+
+    /// Select an index in the tab bar controller.
     open func selectIndex(_ index: Int) {
         animationSwitchingTabBar.tabSelected(index: index, isAnimate: false)
     }
     
     private func setTabBar() {
         animationSwitchingTabBar = AnimationSwitchingTabBar()
-        animationSwitchingTabBar.delegate = self
+        animationSwitchingTabBar.delegate = tabBarDelegate
         view.addSubview(animationSwitchingTabBar)
         animationSwitchingTabBar.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -79,15 +98,17 @@ open class AnimationSwitchingTabBarController: UIViewController {
         }
     }
     
-    private func setUp(_ viewControllers: [AnimationSwitchingViewController]) {
+    private func setup(_ viewControllers: [AnimationSwitchingViewController]) {
         self.viewControllers = viewControllers
         if let firstViewController = viewControllers.first {
             transition(to: firstViewController)
         }
-        animationSwitchingTabBar.setUp(viewControllers: viewControllers, selectedViewColor: backgroundColor)
+
+        animationSwitchingTabBar.setup(viewControllers: viewControllers,
+                                       selectedViewColor: backgroundColor)
     }
     
-    private func transition(to viewController: UIViewController) {
+    fileprivate func transition(to viewController: UIViewController) {
         viewControllers.forEach { customRemoveFromParent($0) }
         customAddChild(viewController)
         viewController.view.translatesAutoresizingMaskIntoConstraints = false
@@ -116,21 +137,28 @@ open class AnimationSwitchingTabBarController: UIViewController {
     }
 }
 
-extension AnimationSwitchingTabBarController: AnimationSwitchingTabBarDelegate {
+final class AnimationSwitchingTabBarControllerTabBarDelegate: AnimationSwitchingTabBarDelegate {
+    private let viewController: AnimationSwitchingTabBarController
+
+    init(viewController: AnimationSwitchingTabBarController) {
+        self.viewController = viewController
+    }
+
     func shouldTabSelected(index: Int) -> Bool {
-        guard let delegate = delegate else { return true }
-        return delegate.tabBarController(self, shouldSelect: viewControllers[index])
+        guard let delegate = viewController.delegate else { return true }
+        return delegate.tabBarController(viewController, shouldSelect: viewController.viewControllers[index])
     }
-    
+
     func startAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
-    
+
     func halfAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
-    
+
     func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
-    
+
     func tabSelected(index: Int) {
-        self.selectedIndex = index
-        transition(to: viewControllers[index])
-        self.delegate?.tabBarController(self, didSelect: viewControllers[index])
+        viewController._selectedIndex = index
+        viewController.transition(to: viewController.viewControllers[index])
+        viewController.delegate?.tabBarController(viewController, didSelect: viewController.viewControllers[index])
     }
+
 }

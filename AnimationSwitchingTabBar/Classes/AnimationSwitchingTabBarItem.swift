@@ -15,7 +15,8 @@ open class AnimationSwitchingTabBarItem: UIView {
 }
 
 open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {
-    
+
+    /// The animationSwitchingTabBarDefaultItem's an icon image.
     var iconImage: UIImage? {
         didSet {
             iconImageView.image = iconImage
