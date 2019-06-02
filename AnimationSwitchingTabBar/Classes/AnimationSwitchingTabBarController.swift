@@ -138,14 +138,15 @@ open class AnimationSwitchingTabBarController: UIViewController {
 }
 
 final class AnimationSwitchingTabBarControllerTabBarDelegate: AnimationSwitchingTabBarDelegate {
-    private let viewController: AnimationSwitchingTabBarController
+    private weak var viewController: AnimationSwitchingTabBarController?
 
     init(viewController: AnimationSwitchingTabBarController) {
         self.viewController = viewController
     }
 
     func shouldTabSelected(index: Int) -> Bool {
-        guard let delegate = viewController.delegate else { return true }
+        guard let viewController = viewController,
+            let delegate = viewController.delegate else { return true }
         return delegate.tabBarController(viewController, shouldSelect: viewController.viewControllers[index])
     }
 
@@ -156,6 +157,7 @@ final class AnimationSwitchingTabBarControllerTabBarDelegate: AnimationSwitching
     func finishAnimation(item: AnimationSwitchingTabBarItem, to: Int) { }
 
     func tabSelected(index: Int) {
+        guard let viewController = viewController else { return }
         viewController._selectedIndex = index
         viewController.transition(to: viewController.viewControllers[index])
         viewController.delegate?.tabBarController(viewController, didSelect: viewController.viewControllers[index])
