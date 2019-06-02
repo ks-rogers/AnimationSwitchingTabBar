@@ -54,7 +54,8 @@ open class AnimationSwitchingTabBarController: UIViewController {
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        
+        delegate = self
+
         setTabBar()
     }
     
@@ -135,6 +136,18 @@ open class AnimationSwitchingTabBarController: UIViewController {
         view.addSubview(viewController.view)
         view.sendSubviewToBack(viewController.view)
     }
+}
+
+extension AnimationSwitchingTabBarController: AnimationSwitchingTabBarControllerDelegate {
+
+    open func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        return true
+    }
+
+    open func tabBarController(_ tabBarController: AnimationSwitchingTabBarController, didSelect viewController: UIViewController) {
+
+    }
+
 }
 
 final class AnimationSwitchingTabBarControllerTabBarDelegate: AnimationSwitchingTabBarDelegate {
