@@ -14,6 +14,7 @@ open class AnimationSwitchingTabBarItem: UIView {
     open func animate() {}
 }
 
+/// an default item in the animatable tab bar controller.
 open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {
 
     /// The animationSwitchingTabBarDefaultItem's an icon image.
@@ -35,7 +36,8 @@ open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {
         
         addSubview(iconImageView)
     }
-    
+
+    /// Define constraints and styles if the item is not selected.
     override open func setNotSelectedItem() {
         let itemSize = CGSize(width: 30, height: 30)
         iconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
@@ -44,6 +46,7 @@ open class AnimationSwitchingTabBarDefaultItem: AnimationSwitchingTabBarItem {
         iconImageView.heightAnchor.constraint(equalToConstant: itemSize.height).isActive = true
     }
     
+    /// Define constraints and styles if the item is selected.
     open override func setSelectedItem() {
         let itemSize = CGSize(width: 32, height: 32)
         iconImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
