@@ -155,6 +155,7 @@ open class AnimationSwitchingTabBar: UIView {
             }) { [weak self] _ in
                 guard let self = self, let item = self.tabSelectedView?.items[index] else { return }
                 self.delegate?.finishAnimation(item: item, to: index)
+                self.tabSelectedView?.springAnimation()
             }
             UIView.animate(withDuration: animationDuration / 2,
                            delay: 0,
