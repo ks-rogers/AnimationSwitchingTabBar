@@ -39,6 +39,7 @@
 /* Begin PBXFileReference section */
 		EE08BF9022A9F2320010A063 /* AnimationSwitchingTabBar.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AnimationSwitchingTabBar.podspec; sourceTree = "<group>"; };
 		EE08BF9222A9F23A0010A063 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		EE08BF9422A9F7A90010A063 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		EE819F0F22A41D020059C69C /* AnimationSwitchingTabBar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AnimationSwitchingTabBar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE819F1222A41D020059C69C /* AnimationSwitchingTabBar.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AnimationSwitchingTabBar.h; sourceTree = "<group>"; };
 		EE819F1322A41D020059C69C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 		EE819F0522A41D020059C69C = {
 			isa = PBXGroup;
 			children = (
+				EE08BF9422A9F7A90010A063 /* LICENSE */,
 				EE08BF9222A9F23A0010A063 /* README.md */,
 				EE08BF9022A9F2320010A063 /* AnimationSwitchingTabBar.podspec */,
 				EE819F1122A41D020059C69C /* AnimationSwitchingTabBar */,

@@ -8,12 +8,10 @@ AnimationSwitchingTabBar is an animatable tab bar class in Swift.
 This project is inspired by [the dribble project](https://dribbble.com/shots/6044647-Tab-Bar-Animation-nr-3).
                        DESC
 
-  s.homepage         = 'https://github.com/ks-rogers/animation-switching-tab-bar'
-  # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
-  s.license          = { :type => 'MIT', :file => 'LICENSE' }
+  s.homepage         = 'https://github.com/ks-rogers/AnimationSwitchingTabBar'
+  s.license          = { :type => 'MIT', :file => './LICENSE' }
   s.author           = { 'K.S.Rogers' => 'info@ks-rogers.co.jp' }
-  s.source           = { :git => 'https://github.com/ks-rogers/animation-switching-tab-bar.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => 'https://github.com/ks-rogers/AnimationSwitchingTabBar.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '10.0'
 
