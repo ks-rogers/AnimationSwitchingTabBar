@@ -12,6 +12,8 @@ This project is inspired by [the dribble project](https://dribbble.com/shots/604
 
 ![alt text](https://github.com/ks-rogers/Assets/blob/master/AnimationSwitchingTabBar/demo.gif)
 
+Android: https://github.com/ks-rogers/AnimationSwitchingBottomNavigationView
+
 ## Usage
 ### Basic
 #### Define a tab view controller
