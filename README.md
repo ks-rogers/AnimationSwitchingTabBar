@@ -31,10 +31,10 @@ class TabViewController: AnimationSwitchingTabBarController {
 ```
 
 #### Define child view controllers
-Inherit `AnimationSwitchingTabBarController` . And set an icon image.
+Inherit `AnimationSwitchingViewController` . And set an icon image.
 
 ```swift
-class Child1ViewController: AnimationSwitchingTabBarController {
+class Child1ViewController: AnimationSwitchingViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setIcon(image: UIImage(named: "SearchIcon"))
